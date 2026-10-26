@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Lixian Zeng — Product Designer</title>
+    <meta name="description" content="Lixian Zeng, product designer. A new portfolio is on its way.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap">
+    <style>
+        /* A holding page in the portfolio's language: the hero's rings and blue haze, the portfolio.exe window,
+           the serif name with the italic role, mono labels, the half circles, the ↳ links. Self-contained. */
+        :root {
+            --bg: #ffffff;
+            --ink: #000000;
+            --ink-muted: #5c5c5c;
+            --accent: #0077FB;
+            --row-hover: #f8f8f8;
+            --hairline: 0.5px solid var(--ink);
+            --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+            --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+            --font-label: 'JetBrains Mono', monospace;
+        }
+        *, *::before, *::after { box-sizing: border-box; }
+        html, body { margin: 0; height: 100%; }
+        body { background: var(--bg); color: var(--ink); -webkit-font-smoothing: antialiased; }
+
+        .stage { position: relative; min-height: 100svh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: clamp(2.5rem, 6vh, 4rem); padding: 4rem 1.25rem 5rem; overflow: hidden; }
+
+        /* the hero's soft blue haze and four breathing rings */
+        .glow { position: absolute; left: 50%; top: 46%; width: min(1400px, 160vw); aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle at center, var(--accent) 0%, transparent 60%); opacity: 0.2; transform: translate(-50%, -50%); pointer-events: none; }
+        .rings { position: absolute; left: 50%; top: 46%; width: min(1300px, 150vw); aspect-ratio: 1.15; transform: translate(-50%, -50%); pointer-events: none; }
+        .rings i { position: absolute; top: 50%; left: 50%; border: var(--hairline); border-radius: 50%; opacity: 0.2; transform: translate(-50%, -50%); animation: pulse 6s infinite; }
+        .rings i:nth-child(1) { width: 100%; height: 100%; }
+        .rings i:nth-child(2) { width: 80%; height: 80%; animation-delay: 0.4s; }
+        .rings i:nth-child(3) { width: 60%; height: 60%; animation-delay: 0.8s; }
+        .rings i:nth-child(4) { width: 40%; height: 40%; animation-delay: 1.2s; }
+        @keyframes pulse {
+            0%, 100% { opacity: 0.1; transform: translate(-50%, -50%) scale(1); }
+            50%      { opacity: 0.3; transform: translate(-50%, -50%) scale(1.1); }
+        }
+
+        /* the window */
+        .window { position: relative; z-index: 1; width: min(640px, 100%); background: var(--bg); border: var(--hairline); box-shadow: 6px 6px 0 var(--accent); }
+        .bar { display: flex; justify-content: space-between; align-items: center; height: 30px; padding-left: 12px; background: var(--row-hover); border-bottom: var(--hairline); font-family: var(--font-label); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; white-space: nowrap; }
+        .controls { display: flex; height: 100%; }
+        .controls i { display: grid; place-items: center; width: 30px; height: 100%; border-left: var(--hairline); font-style: normal; font-size: 11px; letter-spacing: 0; }
+        .body { padding: clamp(2.25rem, 6vw, 3.5rem) clamp(1.5rem, 6vw, 3.5rem) clamp(2rem, 5vw, 3rem); text-align: center; }
+
+        .name { margin: 0; font-family: var(--font-serif); font-weight: 400; font-size: clamp(2.6rem, 8vw, 4.25rem); line-height: 1.02; letter-spacing: -0.035em; }
+        .name em { display: block; font-style: italic; }
+
+        /* the half circles: five solid, rounded on the right, then five hollow, flipped */
+        .deco { --hc: 18px; display: flex; justify-content: center; margin: clamp(1.75rem, 4vw, 2.25rem) 0; }
+        .deco i { flex: none; width: calc(var(--hc) * 1.15); height: calc(var(--hc) * 2); border-radius: 0 100% 100% 0 / 0 50% 50% 0; background: var(--ink); }
+        .deco .hollow { background: none; border: 0.5px solid var(--ink); border-radius: 100% 0 0 100% / 50% 0 0 50%; }
+
+        .status { margin: 0; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-muted); }
+        .cursor { display: inline-block; width: 0.6em; height: 1em; margin-left: 0.2em; vertical-align: -0.15em; background: var(--accent); animation: blink 1.1s steps(1) infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        /* the links, in the portfolio's ↳ style */
+        .links { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 1rem; margin: 0; padding: 0; list-style: none; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; }
+        .links li::before { content: "↳ "; color: var(--accent); }
+        .links a { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 0.5px; transition: color 0.2s; }
+        .links a:hover { color: var(--accent); }
+        .links a:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+
+        .foot { position: absolute; left: 0; right: 0; bottom: 1.5rem; z-index: 1; text-align: center; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-muted); }
+
+        @media (max-width: 480px) {
+            .glow { width: 150vw; }
+            .bar { height: 24px; padding-left: 9px; font-size: 8px; }
+            .controls i { width: 24px; font-size: 9px; }
+            .deco { --hc: 14px; }
+            .status { font-size: 11px; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .rings i, .cursor { animation: none; }
+        }
+    </style>
+</head>
+<body>
+    <main class="stage">
+        <div class="glow" aria-hidden="true"></div>
+        <div class="rings" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+
+        <section class="window" aria-labelledby="name">
+            <div class="bar" aria-hidden="true">
+                <span>portfolio.exe</span>
+                <span class="controls"><i>_</i><i>□</i><i>×</i></span>
+            </div>
+            <div class="body">
+                <h1 id="name" class="name">Lixian Zeng <em>Product Designer</em></h1>
+                <div class="deco" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i class="hollow"></i><i class="hollow"></i><i class="hollow"></i><i class="hollow"></i><i class="hollow"></i></div>
+                <p class="status">New portfolio · coming soon<span class="cursor" aria-hidden="true"></span></p>
+            </div>
+        </section>
+
+        <ul class="links">
+            <li><a href="https://www.linkedin.com/in/lixian-zeng-b1b047152/" target="_blank" rel="noopener">LinkedIn</a></li>
+            <li><a href="mailto:lixianzla@gmail.com">Email</a></li>
+        </ul>
+
+        <p class="foot">© 2026 Lixian Zeng</p>
+    </main>
+</body>
+</html>
